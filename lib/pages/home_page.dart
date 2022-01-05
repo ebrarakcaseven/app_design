@@ -47,7 +47,7 @@ class Home extends StatelessWidget {
                       child: Container(
                         width: 40.0,
                         height: 40.0,
-                        child: Image.asset('images/img.png'),
+                        child: Image.asset('assets/images/img.png'),
                       ),
                       onTap: () => Navigator.push(
                         context,

@@ -1,4 +1,3 @@
-import 'package:app_design/pages/home_page.dart';
 import 'package:flutter/material.dart';
 
 class Register extends StatefulWidget {
