@@ -1,4 +1,7 @@
+import 'package:app_design/service/auth_service.dart';
 import 'package:flutter/material.dart';
+
+import 'login_page.dart';
 
 class Register extends StatefulWidget {
   const Register({Key? key}) : super(key: key);
@@ -8,6 +11,13 @@ class Register extends StatefulWidget {
 }
 
 class _RegisterState extends State<Register> {
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _passwordAgainController =
+      TextEditingController();
+  // ignore: prefer_final_fields
+  AuthService _authService = AuthService();
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -35,13 +45,14 @@ class _RegisterState extends State<Register> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const TextField(
-                          style: TextStyle(
+                      TextField(
+                          controller: _nameController,
+                          style: const TextStyle(
                             color: Colors.black,
                           ),
                           cursorColor: Colors.black,
                           keyboardType: TextInputType.emailAddress,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             border: OutlineInputBorder(),
                             prefixIcon: Icon(
                               Icons.person,
@@ -55,13 +66,14 @@ class _RegisterState extends State<Register> {
                       SizedBox(
                         height: size.height * 0.02,
                       ),
-                      const TextField(
-                          style: TextStyle(
+                      TextField(
+                          controller: _emailController,
+                          style: const TextStyle(
                             color: Colors.black,
                           ),
                           cursorColor: Colors.black,
                           keyboardType: TextInputType.emailAddress,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             border: OutlineInputBorder(),
                             prefixIcon: Icon(
                               Icons.mail,
@@ -75,13 +87,14 @@ class _RegisterState extends State<Register> {
                       SizedBox(
                         height: size.height * 0.02,
                       ),
-                      const TextField(
-                          style: TextStyle(
+                      TextField(
+                          style: const TextStyle(
                             color: Colors.black,
                           ),
+                          controller: _passwordController,
                           cursorColor: Colors.black,
                           obscureText: true,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             border: OutlineInputBorder(),
                             prefixIcon: Icon(
                               Icons.vpn_key,
@@ -95,13 +108,14 @@ class _RegisterState extends State<Register> {
                       SizedBox(
                         height: size.height * 0.02,
                       ),
-                      const TextField(
-                          style: TextStyle(
+                      TextField(
+                          style: const TextStyle(
                             color: Colors.black,
                           ),
+                          controller: _passwordAgainController,
                           cursorColor: Colors.black,
                           obscureText: true,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             border: OutlineInputBorder(),
                             prefixIcon: Icon(
                               Icons.vpn_key,
@@ -116,7 +130,19 @@ class _RegisterState extends State<Register> {
                         height: size.height * 0.02,
                       ),
                       InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          _authService
+                              .createPerson(
+                                  _nameController.text,
+                                  _emailController.text,
+                                  _passwordController.text)
+                              .then((value) {
+                            return Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const LoginPage()));
+                          });
+                        },
                         child: Container(
                           padding: const EdgeInsets.symmetric(vertical: 5),
                           decoration: BoxDecoration(

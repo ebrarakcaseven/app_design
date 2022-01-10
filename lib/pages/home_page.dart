@@ -1,11 +1,15 @@
 import 'dart:ui';
-
 import 'package:app_design/pages/person_page.dart';
 import 'package:flutter/material.dart';
 
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
 
+  @override
+  _HomeState createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -169,59 +173,6 @@ class Home extends StatelessWidget {
                 )
               ],
             ),
-            Padding(
-              padding:
-                  const EdgeInsets.only(top: 16.0, left: 25.0, right: 25.0),
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Container(
-                        width: 165.0,
-                        height: 248.0,
-                        decoration: const BoxDecoration(
-                            color: Color(0xFFCBE3FF),
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(8.0))),
-                      ),
-                      Container(
-                        width: 165.0,
-                        height: 248.0,
-                        decoration: const BoxDecoration(
-                            color: Color(0xFFCBE3FF),
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(8.0))),
-                      ),
-                    ],
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 16.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Container(
-                          width: 165.0,
-                          height: 248.0,
-                          decoration: const BoxDecoration(
-                              color: Color(0xFFCBE3FF),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(8.0))),
-                        ),
-                        Container(
-                          width: 165.0,
-                          height: 248.0,
-                          decoration: const BoxDecoration(
-                              color: Color(0xFFCBE3FF),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(8.0))),
-                        ),
-                      ],
-                    ),
-                  )
-                ],
-              ),
-            )
           ],
         ),
       ),

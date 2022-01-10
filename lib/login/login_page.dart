@@ -1,4 +1,6 @@
 import 'package:app_design/login/register_page.dart';
+import 'package:app_design/pages/home_page.dart';
+import 'package:app_design/service/auth_service.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
@@ -9,6 +11,12 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
+  // ignore: prefer_final_fields
+  AuthService _authService = AuthService();
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -50,13 +58,14 @@ class _LoginPageState extends State<LoginPage> {
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                const TextField(
-                                    style: TextStyle(
+                                TextField(
+                                    controller: _emailController,
+                                    style: const TextStyle(
                                       color: Colors.black,
                                     ),
                                     cursorColor: Colors.black,
                                     keyboardType: TextInputType.emailAddress,
-                                    decoration: InputDecoration(
+                                    decoration: const InputDecoration(
                                       border: OutlineInputBorder(),
                                       prefixIcon: Icon(
                                         Icons.mail,
@@ -70,13 +79,14 @@ class _LoginPageState extends State<LoginPage> {
                                 SizedBox(
                                   height: size.height * 0.01,
                                 ),
-                                const TextField(
-                                    style: TextStyle(
+                                TextField(
+                                    controller: _passwordController,
+                                    style: const TextStyle(
                                       color: Colors.black,
                                     ),
                                     cursorColor: Colors.black,
                                     obscureText: true,
-                                    decoration: InputDecoration(
+                                    decoration: const InputDecoration(
                                       border: OutlineInputBorder(),
                                       prefixIcon: Icon(
                                         Icons.vpn_key,
@@ -91,7 +101,18 @@ class _LoginPageState extends State<LoginPage> {
                                   height: size.height * 0.01,
                                 ),
                                 InkWell(
-                                  onTap: () {},
+                                  onTap: () {
+                                    _authService
+                                        .signIn(_emailController.text,
+                                            _passwordController.text)
+                                        .then((value) {
+                                      return Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  const Home()));
+                                    });
+                                  },
                                   child: Container(
                                     padding:
                                         const EdgeInsets.symmetric(vertical: 5),
