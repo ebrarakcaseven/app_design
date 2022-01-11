@@ -1,5 +1,7 @@
 import 'dart:ui';
 import 'package:app_design/pages/person_page.dart';
+import 'package:app_design/service/status_service.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatefulWidget {
@@ -10,8 +12,12 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  // ignore: prefer_final_fields
+  StatusService _statusService = StatusService();
+  final ScrollController _controller = ScrollController();
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -173,6 +179,75 @@ class _HomeState extends State<Home> {
                 )
               ],
             ),
+            StreamBuilder<QuerySnapshot>(
+                stream: _statusService.getProducts(),
+                builder: (context, snapshot) {
+                  if (!snapshot.hasData) {
+                    return const Text(
+                      'Loading...',
+                    );
+                  } else {
+                    return GridView.builder(
+                        scrollDirection: Axis.vertical,
+                        shrinkWrap: true,
+                        controller: _controller,
+                        itemCount: snapshot.data?.docs.length,
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                                mainAxisSpacing: 5,
+                                crossAxisSpacing: 5,
+                                crossAxisCount: 2),
+                        itemBuilder: (BuildContext context, int index) {
+                          DocumentSnapshot mypost = snapshot.data!.docs[index];
+                          return Padding(
+                            padding: const EdgeInsets.only(
+                                left: 20.0, right: 20, top: 10),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  color: const Color(0xFFCBE3FF),
+                                  border: Border.all(color: Colors.transparent),
+                                  borderRadius: const BorderRadius.all(
+                                      Radius.circular(11))),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Column(
+                                    children: [
+                                      Center(
+                                        child: Padding(
+                                          padding:
+                                              const EdgeInsets.only(top: 15.0),
+                                          child: CircleAvatar(
+                                            backgroundImage: mypost['image'] ==
+                                                    ""
+                                                ? const NetworkImage(
+                                                    "https://www.gentas.com.tr/wp-content/uploads/2021/05/3190-siyah_renk_g483_1250x1000_t3cksofn.jpg")
+                                                : NetworkImage(mypost['image']),
+                                            radius: size.height * 0.08,
+                                          ),
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Text("${mypost['name']}",
+                                            style:
+                                                const TextStyle(fontSize: 22)),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Text("${mypost['price']}",
+                                            style:
+                                                const TextStyle(fontSize: 22)),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                          );
+                        });
+                  }
+                }),
           ],
         ),
       ),

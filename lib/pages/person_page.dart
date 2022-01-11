@@ -14,7 +14,6 @@ class _PersonState extends State<Person> {
   @override
   Widget build(BuildContext context) {
     // ignore: unused_local_variable
-    var size = MediaQuery.of(context).size;
     return Scaffold(
       body: Stack(children: [
         login,
