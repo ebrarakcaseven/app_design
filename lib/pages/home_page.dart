@@ -213,7 +213,7 @@ class _HomeState extends State<Home> {
                                 children: [
                                   Column(
                                     children: [
-                                      Center(
+                                      /* Center(
                                         child: Padding(
                                           padding:
                                               const EdgeInsets.only(top: 15.0),
@@ -226,7 +226,7 @@ class _HomeState extends State<Home> {
                                             radius: size.height * 0.08,
                                           ),
                                         ),
-                                      ),
+                                      ),*/
                                       Padding(
                                         padding: const EdgeInsets.all(8.0),
                                         child: Text("${mypost['name']}",
