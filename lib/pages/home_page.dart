@@ -11,12 +11,14 @@ class Home extends StatefulWidget {
   _HomeState createState() => _HomeState();
 }
 
-class _HomeState extends State<Home> {
+class _HomeState extends State<Home> with TickerProviderStateMixin {
   // ignore: prefer_final_fields
   StatusService _statusService = StatusService();
   final ScrollController _controller = ScrollController();
+
   @override
   Widget build(BuildContext context) {
+    // ignore: unused_local_variable
     var size = MediaQuery.of(context).size;
     return Scaffold(
       body: SingleChildScrollView(
@@ -29,21 +31,25 @@ class _HomeState extends State<Home> {
                   Padding(
                     padding: const EdgeInsets.only(left: 16.0),
                     // ignore: sized_box_for_whitespace
-                    child: Container(
-                      width: 295.0,
-                      child: const TextField(
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(),
-                          hintText: "Search",
-                          prefixIcon: Padding(
-                            padding: EdgeInsets.only(
-                                left: 14.0,
-                                right: 16.34,
-                                top: 14.0,
-                                bottom: 14.0),
-                            child: Icon(
-                              Icons.search,
-                              color: Colors.black,
+                    child: InkWell(
+                      onTap: () {},
+                      // ignore: sized_box_for_whitespace
+                      child: Container(
+                        width: 295.0,
+                        child: const TextField(
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(),
+                            hintText: "Search",
+                            prefixIcon: Padding(
+                              padding: EdgeInsets.only(
+                                  left: 14.0,
+                                  right: 16.34,
+                                  top: 14.0,
+                                  bottom: 14.0),
+                              child: Icon(
+                                Icons.search,
+                                color: Colors.black,
+                              ),
                             ),
                           ),
                         ),
@@ -51,13 +57,13 @@ class _HomeState extends State<Home> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(right: 16.0, left: 40.0),
+                    padding: const EdgeInsets.only(right: 10.0, left: 32.0),
                     child: InkWell(
                       // ignore: sized_box_for_whitespace
                       child: Container(
-                        width: 40.0,
-                        height: 40.0,
-                        child: Image.asset('assets/images/img.png'),
+                        width: 55.0,
+                        height: 55.0,
+                        child: Image.asset('assets/images/pp.png'),
                       ),
                       onTap: () => Navigator.push(
                         context,
@@ -114,7 +120,7 @@ class _HomeState extends State<Home> {
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(8.0))),
                             child: const Icon(
-                              Icons.watch_later,
+                              Icons.laptop_mac,
                               size: 30.0,
                             )),
                       ),
@@ -128,7 +134,7 @@ class _HomeState extends State<Home> {
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(8.0))),
                             child: const Icon(
-                              Icons.favorite,
+                              Icons.phone_iphone,
                               size: 30.0,
                             )),
                       ),
@@ -142,7 +148,7 @@ class _HomeState extends State<Home> {
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(8.0))),
                             child: const Icon(
-                              Icons.navigation,
+                              Icons.watch,
                               size: 30.0,
                             )),
                       ),
@@ -152,11 +158,11 @@ class _HomeState extends State<Home> {
                             width: 73.75,
                             height: 64.0,
                             decoration: const BoxDecoration(
-                                color: Color(0xFFFFF2AE),
+                                color: Color(0xFFCBE3FF),
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(8.0))),
                             child: const Icon(
-                              Icons.face,
+                              Icons.headset,
                               size: 30.0,
                             )),
                       ),
@@ -184,7 +190,7 @@ class _HomeState extends State<Home> {
                 builder: (context, snapshot) {
                   if (!snapshot.hasData) {
                     return const Text(
-                      'Loading...',
+                      'loading...',
                     );
                   } else {
                     return GridView.builder(
@@ -194,54 +200,67 @@ class _HomeState extends State<Home> {
                         itemCount: snapshot.data?.docs.length,
                         gridDelegate:
                             const SliverGridDelegateWithFixedCrossAxisCount(
-                                mainAxisSpacing: 5,
-                                crossAxisSpacing: 5,
-                                crossAxisCount: 2),
+                          mainAxisSpacing: 2,
+                          crossAxisSpacing: 2,
+                          crossAxisCount: 2,
+                          childAspectRatio: 0.9,
+                        ),
                         itemBuilder: (BuildContext context, int index) {
                           DocumentSnapshot mypost = snapshot.data!.docs[index];
                           return Padding(
                             padding: const EdgeInsets.only(
-                                left: 20.0, right: 20, top: 10),
-                            child: Container(
-                              decoration: BoxDecoration(
-                                  color: const Color(0xFFCBE3FF),
-                                  border: Border.all(color: Colors.transparent),
-                                  borderRadius: const BorderRadius.all(
-                                      Radius.circular(11))),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Column(
-                                    children: [
-                                      /* Center(
-                                        child: Padding(
-                                          padding:
-                                              const EdgeInsets.only(top: 15.0),
-                                          child: CircleAvatar(
-                                            backgroundImage: mypost['image'] ==
-                                                    ""
-                                                ? const NetworkImage(
-                                                    "https://www.gentas.com.tr/wp-content/uploads/2021/05/3190-siyah_renk_g483_1250x1000_t3cksofn.jpg")
-                                                : NetworkImage(mypost['image']),
-                                            radius: size.height * 0.08,
+                                left: 16.0, right: 16, top: 5, bottom: 10),
+                            child: InkWell(
+                              /* onTap: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Infotmation()),
+                              ),*/
+                              child: Container(
+                                //height: 400.0,
+                                decoration: BoxDecoration(
+                                    color: const Color(0xFFCBE3FF),
+                                    border:
+                                        Border.all(color: Colors.transparent),
+                                    borderRadius: const BorderRadius.all(
+                                        Radius.circular(8))),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Column(
+                                      children: [
+                                        Center(
+                                          child: Padding(
+                                            padding:
+                                                const EdgeInsets.only(top: 8.0),
+                                            child: CircleAvatar(
+                                              radius: size.height * 0.07,
+                                              backgroundImage: mypost[
+                                                          'image'] ==
+                                                      ""
+                                                  ? const NetworkImage(
+                                                      "https://www.gentas.com.tr/wp-content/uploads/2021/05/3190-siyah_renk_g483_1250x1000_t3cksofn.jpg")
+                                                  : NetworkImage(
+                                                      mypost['image']),
+                                            ),
                                           ),
                                         ),
-                                      ),*/
-                                      Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Text("${mypost['name']}",
-                                            style:
-                                                const TextStyle(fontSize: 22)),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Text("${mypost['price']}",
-                                            style:
-                                                const TextStyle(fontSize: 22)),
-                                      ),
-                                    ],
-                                  ),
-                                ],
+                                        Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Text("${mypost['name']}",
+                                              style: const TextStyle(
+                                                  fontSize: 22)),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Text("${mypost['price']}",
+                                              style: const TextStyle(
+                                                  fontSize: 22)),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                           );

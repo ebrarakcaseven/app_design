@@ -7,10 +7,4 @@ class StatusService {
     var ref = _firestore.collection("products").snapshots();
     return ref;
   }
-
-  //veri silme
-  Future<void> removeStatus(String docId) {
-    var ref = _firestore.collection("products").doc(docId).delete();
-    return ref;
-  }
 }

@@ -177,27 +177,6 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                 ),
-                Padding(
-                  padding: EdgeInsets.only(
-                      top: size.height * .06,
-                      left: size.width * .02,
-                      bottom: 10.0),
-                  child: Align(
-                    alignment: Alignment.topLeft,
-                    child: Row(
-                      children: [
-                        IconButton(
-                          onPressed: () => Navigator.pop(context),
-                          icon: const Icon(
-                            Icons.arrow_back_ios_outlined,
-                            color: Colors.black,
-                            size: 26,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                )
               ],
             ),
           ),
