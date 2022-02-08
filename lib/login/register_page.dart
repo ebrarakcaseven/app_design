@@ -1,8 +1,6 @@
 import 'package:app_design/service/auth_service.dart';
 import 'package:flutter/material.dart';
 
-import 'login_page.dart';
-
 class Register extends StatefulWidget {
   const Register({Key? key}) : super(key: key);
 
@@ -131,17 +129,8 @@ class _RegisterState extends State<Register> {
                       ),
                       InkWell(
                         onTap: () {
-                          _authService
-                              .createPerson(
-                                  _nameController.text,
-                                  _emailController.text,
-                                  _passwordController.text)
-                              .then((value) {
-                            return Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const LoginPage()));
-                          });
+                          _authService.createPerson(_nameController.text,
+                              _emailController.text, _passwordController.text);
                         },
                         child: Container(
                           padding: const EdgeInsets.symmetric(vertical: 5),

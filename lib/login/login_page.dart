@@ -1,5 +1,5 @@
 import 'package:app_design/login/register_page.dart';
-import 'package:app_design/pages/home_page.dart';
+import 'package:app_design/nav.dart';
 import 'package:app_design/service/auth_service.dart';
 import 'package:flutter/material.dart';
 
@@ -59,23 +59,24 @@ class _LoginPageState extends State<LoginPage> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 TextField(
-                                    controller: _emailController,
-                                    style: const TextStyle(
+                                  controller: _emailController,
+                                  style: const TextStyle(
+                                    color: Colors.black,
+                                  ),
+                                  cursorColor: Colors.black,
+                                  keyboardType: TextInputType.emailAddress,
+                                  decoration: const InputDecoration(
+                                    border: OutlineInputBorder(),
+                                    prefixIcon: Icon(
+                                      Icons.mail,
                                       color: Colors.black,
                                     ),
-                                    cursorColor: Colors.black,
-                                    keyboardType: TextInputType.emailAddress,
-                                    decoration: const InputDecoration(
-                                      border: OutlineInputBorder(),
-                                      prefixIcon: Icon(
-                                        Icons.mail,
-                                        color: Colors.black,
-                                      ),
-                                      hintText: 'E-Mail',
-                                      prefixText: ' ',
-                                      hintStyle: TextStyle(color: Colors.black),
-                                      focusColor: Colors.black,
-                                    )),
+                                    hintText: 'E-Mail',
+                                    prefixText: ' ',
+                                    hintStyle: TextStyle(color: Colors.black),
+                                    focusColor: Colors.black,
+                                  ),
+                                ),
                                 SizedBox(
                                   height: size.height * 0.01,
                                 ),
@@ -105,12 +106,35 @@ class _LoginPageState extends State<LoginPage> {
                                     _authService
                                         .signIn(_emailController.text,
                                             _passwordController.text)
+                                        /* try {
+                                      print("giriş doğru");
+                                    } catch (e) {
+                                      print("giriş hatalı");
+                                    }*/
+
+                                        /*  .then((result) {
+                                      if (result == null) {
+                                        Navigator.pushReplacement(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) => Nav()));
+                                      } else {
+                                        Scaffold.of(context)
+                                            .showSnackBar(SnackBar(
+                                          content: Text(
+                                            result
+                                            style: TextStyle(fontSize: 16),
+                                          ),
+                                        ));
+                                      }
+                                    });*/
+
                                         .then((value) {
                                       return Navigator.push(
                                           context,
                                           MaterialPageRoute(
                                               builder: (context) =>
-                                                  const Home()));
+                                                  const Nav()));
                                     });
                                   },
                                   child: Container(

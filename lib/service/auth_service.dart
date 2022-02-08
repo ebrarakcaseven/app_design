@@ -8,7 +8,6 @@ class AuthService {
   //giriş yap fonksiyonu
   Future<User?> signIn(String email, String password) async {
     try {
-      // code that might throw an exception
       var user = await _auth.signInWithEmailAndPassword(
           email: email, password: password);
       return user.user;
